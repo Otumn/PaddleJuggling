@@ -48,11 +48,7 @@ namespace Otumn.Juggling
 
         public void OnTouchHeld(Vector3 pos)
         {
-            racket.MoveTo(pos + new Vector3(0, yOffSet, 0));
-            //racket.transform.position = pos + new Vector3(0, yOffSet, 0);
-            //racketPosTarget = pos + new Vector3(0, yOffSet, 0);
-            //racket.Body.MovePosition(racketPosTarget);
-            //racket.Body.velocity = Vector3.zero;
+            racket.transform.position = pos + new Vector3(0, yOffSet, 0);
             PositionRestriction();
         }
 

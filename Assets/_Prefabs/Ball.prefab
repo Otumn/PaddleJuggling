@@ -10223,7 +10223,7 @@ MonoBehaviour:
   upVelocityMultiplier: 1
   maxVelocity: 10
   paddleBounceFeedback: {fileID: 5484557944318247270}
-  coinObtained: {fileID: 2080301018229205738}
+  coinObtainedFeedback: {fileID: 2080301018229205738}
 --- !u!54 &5078313226963204968
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ namespace Otumn.Juggling
 {
     public class CoinBehaviour : Entity
     {
-        [SerializeField] private float addedSeconds = 25f;
+        [SerializeField] private float addedScore = 25f;
         [SerializeField] private float rotSpeed = 250f;
 
         private CoinSpawnPoint spawnPoint;
@@ -31,8 +31,7 @@ namespace Otumn.Juggling
         public void AddScore()
         {
             spawnPoint.Available = true;
-            GameManager.state.TimeLeft += addedSeconds;
-            GameManager.state.CallOnTimeAdded(addedSeconds);
+            GameManager.state.CallOnScoreAdded(addedScore);
             GameObject.Destroy(gameObject);
         }
 

@@ -52,12 +52,7 @@ namespace Otumn.Juggling
 
         }
 
-        public virtual void OnTimeAdded(float addedTime)
-        {
-
-        }
-
-        public virtual void OnTimeRemoved(float removedTime)
+        public virtual void OnBonusScoreAdded(float addedTime)
         {
 
         }

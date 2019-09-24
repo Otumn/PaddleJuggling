@@ -40,7 +40,6 @@ namespace Otumn.Juggling
         private List<VirtualCameraZoomTarget> zoomTargets = new List<VirtualCameraZoomTarget>();
         private float paddleVelocity = 0f;
         private float currentScore = 0f;
-        private float timeLeft = 0f;
         private float timeLostOnBallDestroyed = 0f;
         private int ballsInGame = 0;
         private int ballsDestroyed = 0;
@@ -97,19 +96,11 @@ namespace Otumn.Juggling
             }
         }
 
-        public void CallOnTimeAdded(float addedTime)
+        public void CallOnScoreAdded(float addedTime)
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                entities[i].OnTimeAdded(addedTime);
-            }
-        }
-
-        public void CallOnTimeRemoved(float removedTime)
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                entities[i].OnTimeRemoved(removedTime);
+                entities[i].OnBonusScoreAdded(addedTime);
             }
         }
 
@@ -184,7 +175,6 @@ namespace Otumn.Juggling
         public int BallsInGame { get => ballsInGame; set => ballsInGame = value; }
         public PlayerData PlayerDatas { get => playerDatas; }
         public float PaddleVelocity { get => paddleVelocity; set => paddleVelocity = value; }
-        public float TimeLeft { get => timeLeft; set => timeLeft = value; }
         public int BallsDestroyed { get => ballsDestroyed; set => ballsDestroyed = value; }
         public float TimeLostOnBallDestroyed { get => timeLostOnBallDestroyed; set => timeLostOnBallDestroyed = value; }
         public List<Entity> Entities { get => entities; }

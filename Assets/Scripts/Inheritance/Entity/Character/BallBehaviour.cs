@@ -14,7 +14,7 @@ namespace Otumn.Juggling
         [SerializeField] private float maxVelocity = 25f;
         [Header("Feedbakcs")]
         [SerializeField] private FeedBack paddleBounceFeedback;
-        [SerializeField] private FeedBack coinObtained;
+        [SerializeField] private FeedBack coinObtainedFeedback;
 
 
         private Vector3 velocityBuffer;
@@ -28,11 +28,6 @@ namespace Otumn.Juggling
         {
             base.OnEnable();
             GameManager.state.BallsInGame++;
-        }
-
-        protected override void Start()
-        {
-            base.Start();
         }
 
         protected override void Update()
@@ -55,9 +50,12 @@ namespace Otumn.Juggling
             }
             if (coll.gameObject.GetComponent<Racket>() != null)
             {
-                Debug.Log("Collision enter from " + gameObject.name);
-                Debug.Break();
                 Bounce(coll.gameObject.GetComponent<Racket>(), coll.contacts[0].normal, coll.contacts[0].point, coll.gameObject.GetComponent<Racket>().BounceForce);
+                GameManager.state.CallOnBallJuggle();
+            }
+            if (coll.gameObject.GetComponent<BallBehaviour>() != null)
+            {
+                WallReflect(velocityBuffer, coll.contacts[0].normal);
             }
         }
 
@@ -65,10 +63,6 @@ namespace Otumn.Juggling
         {
             if (coll.gameObject.GetComponent<GameOverGround>() != null)
             {
-                GameManager.state.BallsDestroyed++;
-                GameManager.state.BallsInGame--;
-                GameManager.state.TimeLeft -= timeLost * GameManager.state.BallsDestroyed;
-                GameManager.state.CallOnTimeRemoved(timeLost * GameManager.state.BallsDestroyed);
                 if (GameManager.state.BallsInGame <= 0)
                 {
                     GameManager.state.CallOnGameOver();
@@ -78,8 +72,8 @@ namespace Otumn.Juggling
 
             if (coll.gameObject.GetComponent<CoinBehaviour>() != null)
             {
-                coinObtained.transform.position = coll.transform.position;
-                coinObtained.Play();
+                coinObtainedFeedback.transform.position = coll.transform.position;
+                coinObtainedFeedback.Play();
                 coll.gameObject.GetComponent<CoinBehaviour>().AddScore();
             }
         }
@@ -129,7 +123,6 @@ namespace Otumn.Juggling
 
             body.AddForce((direction.normalized * force) + Vector3.up * Mathf.Abs(body.velocity.y * 0.2f), ForceMode.Impulse);
             paddleBounceFeedback.Play();
-            GameManager.state.CallOnBallJuggle();
         }
 
         private void WallReflect(Vector3 entryVector, Vector3 normal)

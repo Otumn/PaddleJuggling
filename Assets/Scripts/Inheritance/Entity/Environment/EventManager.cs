@@ -27,7 +27,7 @@ namespace Otumn.Juggling
         {
             base.Start();
             SpawnNewBall(ballSpawnMaxX, ballSpawnMinY, ballSpawnMaxY);
-            StartCoroutine(CoinSpawnTimer());
+            //StartCoroutine(CoinSpawnTimer());
         }
 
         protected override void Update()

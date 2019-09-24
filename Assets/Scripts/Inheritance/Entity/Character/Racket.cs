@@ -46,12 +46,6 @@ namespace Otumn.Juggling
             lastPos = transform.position;
         }
 
-        public void MoveTo(Vector3 targetPos)
-        {
-            Vector3 dir = (targetPos - transform.position);
-            body.velocity = dir * velocityRatio;
-        }
-
         public float BounceForce { get => bounceForce; }
         public AnimationCurve AddedZRotCurve { get => addedZRotCurve; }
         public BoxCollider Coll { get => coll; }
